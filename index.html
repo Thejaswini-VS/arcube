@@ -1,44 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-<script src="https://unpkg.com/aframe-hit-test-component/dist/aframe-hit-test-component.min.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Image</title>
+    <meta name="description" content="360&deg; Image - A-Frame">
+    <script src="../../../dist/aframe-master.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky src="thara.jpg" rotation="0 -130 0"></a-sky>
 
-<body style="margin:0">
-
-<a-scene
-    vr-mode-ui="enabled: false"
-    webxr="requiredFeatures: hit-test"
-    renderer="logarithmicDepthBuffer: true">
-
-    <!-- Camera -->
-    <a-camera hit-test></a-camera>
-
-    <!-- Object to place -->
-    <a-plane 
-        id="photo"
-        src="suje.jpeg"
-        width="1"
-        height="1"
-        visible="false">
-    </a-plane>
-
-</a-scene>
-
-<script>
-AFRAME.registerComponent('hit-test', {
-  init: function () {
-    const scene = this.el.sceneEl;
-    const photo = document.querySelector("#photo");
-
-    scene.addEventListener("click", () => {
-      photo.setAttribute("visible", true);
-      photo.setAttribute("position", "0 0 -1");
-    });
-  }
-});
-</script>
-
-</body>
+      <a-text font="kelsonsans" value="Puy de Sancy, France" width="6" position="-2.5 0.25 -1.5"
+              rotation="0 15 0"></a-text>
+    </a-scene>
+  </body>
 </html>
