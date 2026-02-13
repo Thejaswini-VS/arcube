@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-hit-test-component/dist/aframe-hit-test-component.min.js"></script>
 </head>
 
-<body style="margin:0; overflow:hidden;">
-  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-      
-      <!-- 3D Object -->
-      <a-box position="0 0 -3" src="suje.jpeg"></a-box>
+<body style="margin:0">
 
-    <a-entity camera></a-entity>
-  </a-scene>
+<a-scene
+    vr-mode-ui="enabled: false"
+    webxr="requiredFeatures: hit-test"
+    renderer="logarithmicDepthBuffer: true">
+
+    <!-- Camera -->
+    <a-camera hit-test></a-camera>
+
+    <!-- Object to place -->
+    <a-plane 
+        id="photo"
+        src="suje.jpeg"
+        width="1"
+        height="1"
+        visible="false">
+    </a-plane>
+
+</a-scene>
+
+<script>
+AFRAME.registerComponent('hit-test', {
+  init: function () {
+    const scene = this.el.sceneEl;
+    const photo = document.querySelector("#photo");
+
+    scene.addEventListener("click", () => {
+      photo.setAttribute("visible", true);
+      photo.setAttribute("position", "0 0 -1");
+    });
+  }
+});
+</script>
+
 </body>
 </html>
